@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1705479837 source:c:\users\bear\desktop\ntueecs\n0117\round\untitled3.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stddef.h>
+

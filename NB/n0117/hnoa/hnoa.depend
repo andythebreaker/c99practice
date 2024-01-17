@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1705474552 source:c:\users\bear\desktop\ntueecs\n0117\hnoa\untitled1.c
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<stddef.h>
+

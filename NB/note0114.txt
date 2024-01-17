@@ -1,0 +1,52 @@
+我在想為甚麼<1>、<2>會通、不通?
+//<1>
+//pass
+#include <stdio.h>
+
+int main(){
+    char y(char k){
+        return (char)(k+1);
+    }
+    char x = '0';
+    scanf("%c", &x);
+    printf("<%c>",y(x));
+}
+//<2>
+//no pass
+#include <stdio.h>
+
+int main(){
+    char x = '0';
+    scanf("%c", &x);
+    printf("<%c>",y(x));
+}
+
+
+char y(char k){
+    return (char)(k+1);
+}
+
+結果是變數犯蠢(先後順序)
+這樣就通了!
+//OK!
+#include <stdio.h>
+char y(char k){
+    return (char)(k+1);
+}
+int main(){
+    char x = '0';
+    scanf("%c", &x);
+    printf("<%c>", y(x));
+}
+C字串指標
+#include <stdio.h>
+#include <string.h>
+char y(char* k){
+    return *(k+${0~2});
+}
+int main(){
+    char* x = "abc";
+    printf("<%c>", y(x));
+}
+
+

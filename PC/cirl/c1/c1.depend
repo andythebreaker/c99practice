@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1705321852 source:c:\users\ai\documents\andy\ntueecs\cirl\c1\hello_world.c
+	<stdbool.h>
+	<stdio.h>
+
+1705319630 source:c:\users\ai\documents\andy\ntueecs\cirl\c1\untitled2.c
+	<stdio.h>
+

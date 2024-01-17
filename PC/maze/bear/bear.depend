@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1705387772 source:c:\users\ai\documents\andy\ntueecs\maze\bear\untitled1.c
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<stddef.h>
+
