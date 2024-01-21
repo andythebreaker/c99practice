@@ -1,0 +1,23 @@
+# depslib dependency file v1.0
+1705739979 source:c:\users\bear\desktop\ntueecs\n1119\n0120\untitled3.c
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	"Untitled5.h"
+
+1705739666 source:c:\users\bear\desktop\ntueecs\n1119\n0120\untitled4.c
+	<stdio.h>
+	<string.h>
+	<stdbool.h>
+	<float.h>
+	<errno.h>
+	<stdlib.h>
+	"Untitled5.h"
+
+1705739983 c:\users\bear\desktop\ntueecs\n1119\n0120\untitled5.h
+
+1705740405 source:c:\users\bear\desktop\ntueecs\n1119\n0120\untitled6.c
+	<stdio.h>
+	<string.h>
+	"Untitled5.h"
+
