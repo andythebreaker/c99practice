@@ -1,6 +1,8 @@
 #include <stdio.h>
 
-typedef tree {}
+typedef struct S_node {
+
+} T_node;
 
 int main(){
 
