@@ -22,7 +22,7 @@ void showdata(int data[], int size)
     }
     printf("\n");
 }
-void quick(ind d[],int size,int lf,int rg){
+void quick(int d[],int size,int lf,int rg){
 int i,j,tmp;
 int lf_idx;
 int rg_idx;
