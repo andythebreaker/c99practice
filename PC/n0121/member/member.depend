@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1705820910 source:c:\users\ai\documents\andy\ntueecs\n0121\member\member_age_sort.c
+	<stdio.h>
+	<stdlib.h>
+	<stddef.h>
+	<stdbool.h>
+	<string.h>
+
+1705816954 source:c:\users\ai\documents\andy\ntueecs\n0121\member\quicksort.c
+
