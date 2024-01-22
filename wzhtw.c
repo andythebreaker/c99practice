@@ -9,7 +9,7 @@ int main() {
     wchar_t wstr[] = L"這是一個繁體中文寬字串";
 
     // Print wide string using wprintf
-    wprintf(L"%ls\n", wstr);
+    wprintf(L"\x1b[32;49m%ls\n", wstr);
 
     return 0;
 }
