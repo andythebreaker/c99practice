@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <wchar.h>
 #include <stdlib.h>
@@ -8,7 +9,10 @@
 /*C99 standard (ISO/IEC 9899:1999):
 7.11.1.1 The setlocale function (p: 205-206)*/
 
-/*typedef struct Node
+#define PRINT_ALL_TRY false
+#define IF_print_all_try if(PRINT_ALL_TRY)
+
+typedef struct Node
 {
     void *data;
     struct Node *next;
@@ -20,15 +24,13 @@ typedef struct Linkedlist
     Node *Tail;
 } Linkedlist;
 
-typedef struct Heap{
-    //TODO ING!
-}
-
 void initLinkedlist(Linkedlist *list)
 {
     list->Head = NULL;
     list->Tail = NULL;
 }
+
+typedef Linkedlist Heap;
 
 void addHead(Linkedlist *list, void *data)
 {
@@ -44,23 +46,59 @@ void addHead(Linkedlist *list, void *data)
     }
     list->Head = tmp;
 }
-
-typedef struct Member{
-int age;
-int height;
-char name[];
-}Member;
-
-void addNewMember(Linkedlist *list, Member *member){
-addHead(list,(void*)member);
+void initHeap(Heap* heap)
+{
+    initLinkedlist(heap);
 }
 
-void addNewMember_via_name_age_height(char* name,int age,int height){
-Member *member=(Member*)malloc(sizeof(Member)+strlen(name)+1);//!IMPORTANT!我都忘記這裡這樣搞要加一
-member->age=age;
-member->height=height;
-strcpy(member->name,name);
-}*/
+void pushHeap(Heap* heap, void* data)
+{
+    addHead(heap,data);
+}
+
+void *popHeap(Heap *heap)
+{
+    void *tmp=NULL;
+    if(heap->Tail==NULL)
+    {
+        tmp=NULL;
+    }
+    else if(heap->Head==heap->Tail)
+    {
+        tmp=heap->Head->data;
+        free(heap->Head);
+        heap->Head=NULL;
+        heap->Tail=NULL;
+    }
+    else
+    {
+        Node *node_to_remove = heap->Head;
+        tmp=node_to_remove->data;
+        heap->Head=node_to_remove->next;
+        free(node_to_remove);
+    }
+    return tmp;
+}
+
+typedef struct Member
+{
+    int age;
+    int height;
+    char name[];
+} Member;
+
+void addNewMember(Linkedlist *list, Member *member)
+{
+    addHead(list,(void*)member);
+}
+
+void addNewMember_via_name_age_height(char* name,int age,int height)
+{
+    Member *member=(Member*)malloc(sizeof(Member)+strlen(name)+1);//!IMPORTANT!我都忘記這裡這樣搞要加一
+    member->age=age;
+    member->height=height;
+    strcpy(member->name,name);
+}
 
 int main()
 {
@@ -71,7 +109,7 @@ int main()
     system("chcp 65001");
 
     // File name with mixed Traditional Chinese and English characters
-    const wchar_t *filename = L"蔡亞恩.txt";
+    const wchar_t *filename = L"D:\\Andy\\c99practice\\蔡亞恩.txt";
 
     // Open the file in read mode with wide characters
     FILE *file = _wfopen(filename, L"r, ccs=UTF-8");
@@ -93,45 +131,83 @@ int main()
         if (ab)
         {
             ab = false;
-            printf("\x1b[32;49m"); // 綠色
+            IF_print_all_try printf("\x1b[32;49m"); // 綠色
         }
         else
         {
             ab = true;
-            printf("\x1b[31;49m"); // 紅色
+            IF_print_all_try printf("\x1b[31;49m"); // 紅色
         }
         // if string include "漢語拼音：", \x1b[30;43m
         if (wcsstr(buffer, L"漢語拼音：") != NULL) // TODO? if not wchar_t ?
         {
-            printf("\x1b[30;43m"); // 黑底黃字
+            IF_print_all_try printf("\x1b[30;43m"); // 黑底黃字
             // buffer.foreach
             wchar_t *p = buffer;
+            bool after_colon = false;
+            wchar_t *w_name_str=(wchar_t*)malloc(sizeof(wchar_t));
             while (*p != L'\0')
             {
                 if (*p == L'：')
                 {
-                    printf("\x1b[34;43;1;3;4m");
-                    wprintf(L"%lc", *p);
-                    printf("\x1b[0m"); // 白色
+                    IF_print_all_try printf("\x1b[34;43;1;3;4m");
+                    IF_print_all_try wprintf(L"%lc", *p);
+                    IF_print_all_try printf("\x1b[0m"); // 白色
+                    after_colon=true;
+                    w_name_str[0]=L'\0';
                 }
                 else
                 {
+                    if(after_colon)
+                    {
+                        /*
+                                https://learn.microsoft.com/zh-tw/cpp/c-runtime-library/reference/strlen-wcslen-mbslen-mbslen-l-mbstrlen-mbstrlen-l?view=msvc-170
+                                strlen 會將字串解譯為單一位元組字元字串，因此即使字串包含多位元組字元，傳回值也會一律等於位元組數。 wcslen 是寬字元版本的 strlen；wcslen 的引數是寬字元字串，且字元的計數也是使用寬 (二位元) 字元。 否則，wcslen 和 strlen 的行為即會相同。
+                                */
+                        int long_str_ptr=(int)wcslen(w_name_str);
+                        wchar_t *realloc_w_name_str=(wchar_t*)realloc(w_name_str,sizeof(wchar_t)*(long_str_ptr+2));
+                        if(realloc_w_name_str)
+                        {
+                            w_name_str=realloc_w_name_str;
+                        }
+                        else
+                        {
+                            printf("TODO EXIT");
+                        }
+                        w_name_str[long_str_ptr]=*p;
+                    }
                     printf("\x1b[30;43m");
                     wprintf(L"%lc", *p);
                     printf("\x1b[0m"); // 白色
                 }
                 p++;
             }
+            char name_str[wcslen(w_name_str)+1];
+            int ret = wcstombs(name_str,w_name_str,sizeof(name_str)/sizeof(char));
+            if(ret==wcslen(w_name_str)+1)
+            {
+                name_str[wcslen(w_name_str)]='\0';
+                printf("[!]\n");
+            }
+            if(ret)
+            {
+                printf("%s\n",name_str);
+            }
+            else
+            {
+                printf("[ERROR]");
+            }
+            free(w_name_str);
         }
         else
         {
-            wprintf(L"%ls", buffer);
+            IF_print_all_try wprintf(L"%ls", buffer);
         }
     }
 
     // Close the file
     fclose(file);
-    printf("\x1b[39;49m"); // 白色
+    IF_print_all_try printf("\x1b[39;49m"); // 白色
     // Change code page back to 950 (default for many East Asian languages)
     // system("chcp 950");
 

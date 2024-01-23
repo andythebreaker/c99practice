@@ -9,6 +9,9 @@
 /*C99 standard (ISO/IEC 9899:1999):
 7.11.1.1 The setlocale function (p: 205-206)*/
 
+#define PRINT_ALL_TRY false
+#define IF_print_all_try if(PRINT_ALL_TRY)
+
 typedef struct Node
 {
     void *data;
@@ -100,7 +103,7 @@ void addNewMember_via_name_age_height(char* name,int age,int height)
 int main()
 {
     // Set the locale to support wide characters
-    setlocale(LC_ALL, "");
+    setlocale(LC_ALL, "ja_JP.utf8");
 
     // Change code page to 65001 (UTF-8)
     system("chcp 65001");
@@ -128,17 +131,17 @@ int main()
         if (ab)
         {
             ab = false;
-            printf("\x1b[32;49m"); // 綠色
+            IF_print_all_try printf("\x1b[32;49m"); // 綠色
         }
         else
         {
             ab = true;
-            printf("\x1b[31;49m"); // 紅色
+            IF_print_all_try printf("\x1b[31;49m"); // 紅色
         }
         // if string include "漢語拼音：", \x1b[30;43m
         if (wcsstr(buffer, L"漢語拼音：") != NULL) // TODO? if not wchar_t ?
         {
-            printf("\x1b[30;43m"); // 黑底黃字
+            IF_print_all_try printf("\x1b[30;43m"); // 黑底黃字
             // buffer.foreach
             wchar_t *p = buffer;
             bool after_colon = false;
@@ -147,9 +150,9 @@ int main()
             {
                 if (*p == L'：')
                 {
-                    printf("\x1b[34;43;1;3;4m");
-                    wprintf(L"%lc", *p);
-                    printf("\x1b[0m"); // 白色
+                    IF_print_all_try printf("\x1b[34;43;1;3;4m");
+                    IF_print_all_try wprintf(L"%lc", *p);
+                    IF_print_all_try printf("\x1b[0m"); // 白色
                     after_colon=true;
                     w_name_str[0]=L'\0';
                 }
@@ -179,22 +182,32 @@ int main()
                 }
                 p++;
             }
-//TODO free ,
-char name_str[wcslen(w_name_str)+1];
-int ret = wcstombs(name_str,w_name_str,sizeof(name_str)/sizeof(char));
-if(ret==wcslen(w_name_str)+1){
-    name_str[]
-}
+            char name_str[wcslen(w_name_str)+1];
+            int ret = wcstombs(name_str,w_name_str,sizeof(name_str)/sizeof(char));
+            if(ret==wcslen(w_name_str)+1)
+            {
+                name_str[wcslen(w_name_str)]='\0';
+                printf("[!]\n");
+            }
+            if(ret)
+            {
+                printf("%s\n",name_str);
+            }
+            else
+            {
+                printf("[ERROR]");
+            }
+            free(w_name_str);
         }
         else
         {
-            wprintf(L"%ls", buffer);
+            IF_print_all_try wprintf(L"%ls", buffer);
         }
     }
 
     // Close the file
     fclose(file);
-    printf("\x1b[39;49m"); // 白色
+    IF_print_all_try printf("\x1b[39;49m"); // 白色
     // Change code page back to 950 (default for many East Asian languages)
     // system("chcp 950");
 
