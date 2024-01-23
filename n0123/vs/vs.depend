@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1705982361 source:d:\andy\c99practice\n0123\vs\phrase_name_and_height.c
+	<stdio.h>
+	<wchar.h>
+	<stdlib.h>
+	<stdbool.h>
+	<stddef.h>
+	<string.h>
+	<locale.h>
+
