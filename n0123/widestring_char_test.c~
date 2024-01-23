@@ -1,0 +1,12 @@
+#include <stdio.h>
+#include <stddef.h>
+#include <stdlib.h>
+#include <wchar.h>
+#include <string.h>
+#include <locale.h>
+int main(){
+setlocale(LC_ALL,"");
+system("chcp 65001");
+wchar_t x[] = L"繁體中文測試";
+printf("%ls",x);
+}

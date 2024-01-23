@@ -48,9 +48,33 @@ void initHeap(Heap* heap)
     initLinkedlist(heap);
 }
 
-void addHeap(Heap* heap, void* data)
+void pushHeap(Heap* heap, void* data)
 {
     addHead(heap,data);
+}
+
+void *popHeap(Heap *heap)
+{
+    void *tmp=NULL;
+    if(heap->Tail==NULL)
+    {
+        tmp=NULL;
+    }
+    else if(heap->Head==heap->Tail)
+    {
+        tmp=heap->Head->data;
+        free(heap->Head);
+        heap->Head=NULL;
+        heap->Tail=NULL;
+    }
+    else
+    {
+        Node *node_to_remove = heap->Head;
+        tmp=node_to_remove->data;
+        heap->Head=node_to_remove->next;
+        free(node_to_remove);
+    }
+    return tmp;
 }
 
 typedef struct Member
@@ -117,6 +141,8 @@ int main()
             printf("\x1b[30;43m"); // 黑底黃字
             // buffer.foreach
             wchar_t *p = buffer;
+            bool after_colon = false;
+            wchar_t *w_name_str=(wchar_t*)malloc(sizeof(wchar_t));
             while (*p != L'\0')
             {
                 if (*p == L'：')
@@ -124,15 +150,41 @@ int main()
                     printf("\x1b[34;43;1;3;4m");
                     wprintf(L"%lc", *p);
                     printf("\x1b[0m"); // 白色
+                    after_colon=true;
+                    w_name_str[0]=L'\0';
                 }
                 else
                 {
+                    if(after_colon)
+                    {
+                        /*
+                                https://learn.microsoft.com/zh-tw/cpp/c-runtime-library/reference/strlen-wcslen-mbslen-mbslen-l-mbstrlen-mbstrlen-l?view=msvc-170
+                                strlen 會將字串解譯為單一位元組字元字串，因此即使字串包含多位元組字元，傳回值也會一律等於位元組數。 wcslen 是寬字元版本的 strlen；wcslen 的引數是寬字元字串，且字元的計數也是使用寬 (二位元) 字元。 否則，wcslen 和 strlen 的行為即會相同。
+                                */
+                        int long_str_ptr=(int)wcslen(w_name_str);
+                        wchar_t *realloc_w_name_str=(wchar_t*)realloc(w_name_str,sizeof(wchar_t)*(long_str_ptr+2));
+                        if(realloc_w_name_str)
+                        {
+                            w_name_str=realloc_w_name_str;
+                        }
+                        else
+                        {
+                            printf("TODO EXIT");
+                        }
+                        w_name_str[long_str_ptr]=*p;
+                    }
                     printf("\x1b[30;43m");
                     wprintf(L"%lc", *p);
                     printf("\x1b[0m"); // 白色
                 }
                 p++;
             }
+//TODO free ,
+char name_str[wcslen(w_name_str)+1];
+int ret = wcstombs(name_str,w_name_str,sizeof(name_str)/sizeof(char));
+if(ret==wcslen(w_name_str)+1){
+    name_str[]
+}
         }
         else
         {

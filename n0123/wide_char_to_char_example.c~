@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <wchar.h>
+#include <locale.h>
+#include <stdlib.h>
+#include <stddef.h>
+
+int main() {
+    // Set the locale to the user's default locale
+    setlocale(LC_ALL, "");
+
+    // Wide character string
+    const wchar_t wstr[] = L"tina";
+
+    // Determine the size of the multibyte character buffer
+    size_t mbstr_size = wcsrtombs(NULL, &wstr, 0, NULL);
+
+    // Allocate memory for the multibyte character buffer
+    char *mbstr = (char *)malloc(mbstr_size + 1);
+
+    // Convert the wide character string to multibyte character string
+    if (wcsrtombs(mbstr, &wstr, mbstr_size + 1, NULL) != (size_t)-1) {
+        // Print the result
+        printf("Multibyte string: %s\n", mbstr);
+
+        // Don't forget to free the allocated memory
+        free(mbstr);
+    } else {
+        // Handle conversion error
+        perror("wcsrtombs");
+    }
+
+    return 0;
+}
