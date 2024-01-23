@@ -109,7 +109,7 @@ int main()
     system("chcp 65001");
 
     // File name with mixed Traditional Chinese and English characters
-    const wchar_t *filename = L"D:\\Andy\\c99practice\\蔡亞恩.txt";
+    const wchar_t *filename = L"蔡亞恩.txt";
 
     // Open the file in read mode with wide characters
     FILE *file = _wfopen(filename, L"r, ccs=UTF-8");
@@ -141,6 +141,9 @@ int main()
         // if string include "漢語拼音：", \x1b[30;43m
         if (wcsstr(buffer, L"漢語拼音：") != NULL) // TODO? if not wchar_t ?
         {
+
+wprintf(L"{{%ls}}", buffer);
+
             IF_print_all_try printf("\x1b[30;43m"); // 黑底黃字
             // buffer.foreach
             wchar_t *p = buffer;
@@ -175,14 +178,16 @@ int main()
                             printf("TODO EXIT");
                         }
                         w_name_str[long_str_ptr]=*p;
+                        w_name_str[long_str_ptr+1]=L'\0';//!important 幹87喔XD
                     }
-                    printf("\x1b[30;43m");
-                    wprintf(L"%lc", *p);
-                    printf("\x1b[0m"); // 白色
+                    IF_print_all_try printf("\x1b[30;43m");
+                    IF_print_all_try wprintf(L"%lc", *p);
+                    IF_print_all_try printf("\x1b[0m"); // 白色
                 }
                 p++;
             }
-            char name_str[wcslen(w_name_str)+1];
+            wprintf(L"<<%ls>>\n",w_name_str);
+            /*char name_str[wcslen(w_name_str)+1];
             int ret = wcstombs(name_str,w_name_str,sizeof(name_str)/sizeof(char));
             if(ret==wcslen(w_name_str)+1)
             {
@@ -195,8 +200,8 @@ int main()
             }
             else
             {
-                printf("[ERROR]");
-            }
+                printf("[ERROR]\n");
+            }*/
             free(w_name_str);
         }
         else
