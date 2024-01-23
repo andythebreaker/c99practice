@@ -21,13 +21,13 @@ typedef struct Linkedlist
     Node *Tail;
 } Linkedlist;
 
-typedef Linkedlist Heap;
-
 void initLinkedlist(Linkedlist *list)
 {
     list->Head = NULL;
     list->Tail = NULL;
 }
+
+typedef Linkedlist Heap;
 
 void addHead(Linkedlist *list, void *data)
 {
@@ -42,6 +42,15 @@ void addHead(Linkedlist *list, void *data)
         tmp->next = list->Head;
     }
     list->Head = tmp;
+}
+void initHeap(Heap* heap)
+{
+    initLinkedlist(heap);
+}
+
+void addHeap(Heap* heap, void* data)
+{
+    addHead(heap,data);
 }
 
 typedef struct Member
@@ -67,7 +76,7 @@ void addNewMember_via_name_age_height(char* name,int age,int height)
 int main()
 {
     // Set the locale to support wide characters
-    setlocale(LC_ALL, "ja_JP.utf8");
+    setlocale(LC_ALL, "");
 
     // Change code page to 65001 (UTF-8)
     system("chcp 65001");
