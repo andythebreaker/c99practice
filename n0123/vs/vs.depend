@@ -8,7 +8,8 @@
 	<string.h>
 	<locale.h>
 
-1706003307 source:c:\users\ai\documents\andy\code\c99practice\n0123\vs\phrase_name_and_height.c
+1706026051 source:c:\users\ai\documents\andy\code\c99practice\n0123\vs\phrase_name_and_height.c
+	<ctype.h>
 	<stdio.h>
 	<wchar.h>
 	<stdlib.h>

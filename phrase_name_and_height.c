@@ -107,8 +107,13 @@ void addNewMember_via_name_age_height(char *name, int age, int height)
     strcpy(member->name, name);
 }
 
+typedef Heap *HeapPtr;
+
 int main()
 {
+    Heap heap;
+    HeapPtr h = &heap;
+    initHeap(h);
     // Set the locale to support wide characters
     setlocale(LC_ALL, "ja_JP.utf8");
 
@@ -182,7 +187,7 @@ int main()
                         }
                         else
                         {
-                            exit( EXIT_FAILURE );//TODO __LINE__
+                            exit(EXIT_FAILURE); // TODO __LINE__
                         }
                         w_name_str[long_str_ptr] = *p;
                         w_name_str[long_str_ptr + 1] = L'\0'; //! important 幹87喔XD
@@ -217,7 +222,10 @@ int main()
                 char name_str_remove_space[name_str_high_ptr - name_str_low_ptr + 2];
                 memcpy(name_str_remove_space, name_str_low_ptr, name_str_high_ptr - name_str_low_ptr + 1);
                 name_str_remove_space[name_str_high_ptr - name_str_low_ptr + 1] = '\0';
-                printf("<<<%s>>%d>", name_str_remove_space,*name_str_remove_space);
+                printf("<<<%s>>%d>", name_str_remove_space, *name_str_remove_space);
+                Member *member = (Member *)malloc(sizeof(Member) + (strlen(name_str_remove_space) + 1) * sizeof(char));
+                strcpy(member->name, name_str_remove_space);
+                pushHeap(h, member);
             }
             else
             {
@@ -236,6 +244,14 @@ int main()
     IF_print_all_try printf("\x1b[39;49m"); // 白色
     // Change code page back to 950 (default for many East Asian languages)
     // system("chcp 950");
+
+    printf("\n");
+    while (h->Tail!=NULL)
+    {
+        Member *member_to_free = (Member *)popHeap(h);
+        printf("member name:\t%s\n", member_to_free->name);
+        free(member_to_free);
+    }
 
     return EXIT_SUCCESS;
 }
