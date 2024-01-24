@@ -42,6 +42,7 @@ typedef Linkedlist Heap;
 void addHead(Linkedlist *list, void *data)
 {
     Node *tmp = (Node *)malloc(sizeof(Node));
+    tmp->data=data;//哇我是87，忘記放data
     if (list->Tail == NULL)
     {
         list->Tail = tmp;
@@ -53,6 +54,7 @@ void addHead(Linkedlist *list, void *data)
     }
     list->Head = tmp;
 }
+
 void initHeap(Heap *heap)
 {
     initLinkedlist(heap);
@@ -121,7 +123,7 @@ int main()
     system("chcp 65001");
 
     // File name with mixed Traditional Chinese and English characters
-    const wchar_t *filename = L"蔡亞恩.txt";
+    const wchar_t *filename = L"C:\\Users\\vboxuser\\c99practice\\蔡亞恩.txt";
 
     // Open the file in read mode with wide characters
     FILE *file = _wfopen(filename, L"r, ccs=UTF-8");
@@ -222,7 +224,7 @@ int main()
                 char name_str_remove_space[name_str_high_ptr - name_str_low_ptr + 2];
                 memcpy(name_str_remove_space, name_str_low_ptr, name_str_high_ptr - name_str_low_ptr + 1);
                 name_str_remove_space[name_str_high_ptr - name_str_low_ptr + 1] = '\0';
-                printf("<<<%s>>%d>", name_str_remove_space, *name_str_remove_space);
+                IF_record_point_2 printf("<<<%s>>%d>", name_str_remove_space, *name_str_remove_space);
                 Member *member = (Member *)malloc(sizeof(Member) + (strlen(name_str_remove_space) + 1) * sizeof(char));
                 strcpy(member->name, name_str_remove_space);
                 pushHeap(h, member);
