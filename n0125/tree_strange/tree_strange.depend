@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1706171314 source:c:\users\ai\documents\andy\code\c99practice\n0125\tree_strange\untitled1.c
+	<ctype.h>
+	<stdio.h>
+	<wchar.h>
+	<stdlib.h>
+	<stdbool.h>
+	<stddef.h>
+	<string.h>
+	<time.h>
+	<locale.h>
+

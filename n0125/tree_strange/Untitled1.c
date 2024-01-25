@@ -1,3 +1,4 @@
+
 #include <ctype.h>
 #include <stdio.h>
 #include <wchar.h>
@@ -190,7 +191,19 @@ int Comp_sel(void *a, void *b, age_or_height sel)
     }
 }
 
-typedef int (*COMP_SEL)(void *, void *, age_or_height);
+int Comp_age_then_height(void *a, void *b)
+{
+    if(Comp_sel(a,b,age)==0)
+    {
+        return Comp_sel(a,b,height);
+    }
+    else
+    {
+        return Comp_sel(a,b,age);
+    }
+}
+
+typedef int (*COMP_SEL)(void *, void *);
 
 void InsertNode(TreeNode **PTR_to_NodeRoot, COMP_SEL comp_sel, void *data)
 {
@@ -206,7 +219,7 @@ void InsertNode(TreeNode **PTR_to_NodeRoot, COMP_SEL comp_sel, void *data)
     TreeNode *tmp = *PTR_to_NodeRoot;
     while (1)
     {
-        if (comp_sel(data, tmp->data, age) > 0)
+        if (comp_sel(data, tmp->data) > 0)
         {
             if (tmp->Right == NULL)
             {
@@ -222,7 +235,7 @@ void InsertNode(TreeNode **PTR_to_NodeRoot, COMP_SEL comp_sel, void *data)
         {
             if (tmp->Left == NULL)
             {
-                tmp->Right = newNode;
+                tmp->Left = newNode;
                 break;
             }
             else
@@ -265,7 +278,7 @@ int main()
     system("chcp 65001");
 
     // File name with mixed Traditional Chinese and English characters
-    const wchar_t *filename = L"蔡亞恩.txt";
+    const wchar_t *filename = L"C:\\Users\\ai\\Documents\\andy\\code\\c99practice\\蔡亞恩.txt";
 
     // Open the file in read mode with wide characters
     FILE *file = _wfopen(filename, L"r, ccs=UTF-8");
@@ -378,7 +391,8 @@ int main()
             free(w_name_str);
         }
         else if (wcsstr(buffer, L"生日：") != NULL)
-        { ////COPY STRAT FROM...
+        {
+            ////COPY STRAT FROM...
             IF_record_point_1 wprintf(L"{{%ls}}", buffer);
             IF_print_all_try printf("\x1b[30;43m");
             wchar_t *p = buffer;
@@ -458,7 +472,8 @@ int main()
             free(w_name_str);
         } ////COPY END...
         else if (wcsstr(buffer, L"身高：") != NULL)
-        { ////COPY STRAT FROM...
+        {
+            ////COPY STRAT FROM...
             IF_record_point_1 wprintf(L"{{%ls}}", buffer);
             IF_print_all_try printf("\x1b[30;43m");
             wchar_t *p = buffer;
@@ -549,12 +564,12 @@ int main()
     while (h->Tail != NULL)
     {
         Member *member_to_free = (Member *)popHeap(h);
-        InsertNode(&root, &Comp_sel, member_to_free);
-        // printf("member name:\t%20s\tbirthdate:%5d%3d%3d\tage:%4d\theight:%4d\n", member_to_free->name, member_to_free->y, member_to_free->m, member_to_free->d, member_to_free->age, member_to_free->height);
+        InsertNode(&root, &Comp_age_then_height, member_to_free);
+        printf("\n\x1b[35;47m member name:\t%20s\tbirthdate:%5d%3d%3d\tage:%4d\theight:%4d\x1b[0m\n", member_to_free->name, member_to_free->y, member_to_free->m, member_to_free->d, member_to_free->age, member_to_free->height);
         // free(member_to_free);
     }
-
+    printf("\n========================\n");
     inOrder(root, &Display);
-
+    printf("\n========================\n");
     return EXIT_SUCCESS;
 }
