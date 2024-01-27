@@ -9,7 +9,7 @@ bool att(int q_[Q],int x,int y){
 bool tmp = flase;
 LOOP{
 if(q_[i]!=-1){
-    if x
+    if x = ek
 }
 }
 return tmp;

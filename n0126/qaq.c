@@ -2,7 +2,7 @@
 #include <math.h>
 #include <stdbool.h>
 #include <string.h>
-#define EIGHT 8
+#define EIGHT 4
 #define NL printf("\n");
 #define PRINTq                                        \
     printf("\x1b[30;45m");                            \
@@ -71,7 +71,6 @@ void decide_position(int value)
 int main()
 {
     //證實他初值不管如何都會對
-    queen[0]=0;queen[1]=1;queen[2]=2;queen[3]=3;queen[4]=0;queen[5]=1;queen[6]=2;queen[7]=3;
     PRINTQ
     decide_position(0);
     printf("Final No.%d\n", number);
