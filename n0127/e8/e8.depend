@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1706348753 source:c:\users\ai\documents\andy\code\c99practice\n0127\e8\untitled2.c
+	<stdio.h>
+	<stdbool.h>
+	<stdlib.h>
+	<stddef.h>
+	<math.h>
+
