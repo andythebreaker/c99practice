@@ -4,6 +4,8 @@
 #include <stddef.h>
 #include <ctype.h>
 #include <stdbool.h>
+#include <math.h>
+#include <time.h>
 #define OX_schedule "OXXOXXO-OX--O-XOOXXO-X-X-XOO-OXO-OOX-OXOO-OO-XXOO-XXOXOOX-OX-X-XOXXOXOOOX-O--OX-XX--OO-OXXOXOOXO---OOXXXXOO-XXO-OX-O-OXOOOO--OXX-OXXXXO-OX-OOX-OO-X-XXOOX-XO-OXO-OXXOOXX-OXXO-XOO-O-XXOO--OOOXX-OXXO--XO-XXO-O-OOO-OOX-OOOX-XXO-OO-XOXXOXXXO--XXO-O-OXXOXOO---OXXXX-OOOOXO--OXOOXOXX-XX-OO-X-OX-OXXO-XXO-XOO-O-OX-XOXXOO-OOO-XXXOOOX-XXOX-O-OXO--XXOO--OOOXXOXXXOXO---XOXXX--OO-OXX-OX-OO-OX-X-OOOXO-XOXOXOX-OXOXO--XXXOOXOX-XOXOOO---XO--OXXOX-OOXO-OXOOX-OOX-OXXOOXXOOOXXXOO-OOX--O-OXXOX---X-XXOOOXXOXXXOO--X-X-O-O--XXXX-OOOOOOO--XOXX-O-O-XXX-OOOXOOXXX-OOOO-OOO--OXXXO-XX-O-OOXX-XX-OO--OOOXOXO---XXOXX-XOOOXO-XXOX--OOOO-X--XO-XOOOX-O----XOO-XXOO-XOO-XOOXOXO-X--XO--XOX-XXXOOXOX--XOOOOOO-O-XXOO-O-OXO--O---XX--OOXXOXOX-OX-OXOO-OO--XOXXOO-OXOXO-O--O-XOX--O-O-OOX-OX-OO-X--XOOX-OXX--XO-X--OO-XXOO-OO-OO--X-OO-OO--X-OXOX-O-OOX----X-XX-OOO--OX---XOOOO-O--XO--OO-----OXXOX-OOOX--OX-XOOOXXXOOOO---XO-O-OO-X-OXX-OOXOOO---OXOXO-X-OXO-X-OO-X---OXXXOO-OO-OX-O-X-OXXO--XO-OO-OOXO-O-X-X---OOOOOXXXOXXOX-OOO---OX---OX--OO-O-XOXXO--OO---OXOX-OO-O--XOO--XO-XO-XXOOO-XO-XXOOO---X-O-XXOX-O-OO-OXO-OO-XOOX-OO-X-O--O-O-OO-XX-OX-XXX-OO----XOXOOOOOXO--XOXO-OO-OOO-OOXX---XOXXOOOO-XO--X-OX----XOXX-OO-OOOXX-O---O-X--OOOO-OXX-O-XOOX--XOXXO--OOOXXXOO--OOOOX--O-X--OXX--OO-O--XOXOO-O-OOO-XOX-X-O--OXOXOOXXX--OOOO----X-X--XOOX-O--X-XOOOX-OO-OO--O-OXXOXOO-O-X--OX-OXO-XX--OOXOOXX-O-O-XX-O-O-OO-O-O-XOO-OX---O-OXOOX--XXXX-OOO-O--XOO-XOOO--XOXOOOO-XO----OXX-X--OOOXOO-XXOX---O-OO-XOX-O-OOXO-X-O-OO----XOX--O-XXXOOOX-OOO-XOOXO--OX--OXX--OOOX-OXO-OO-O-XXO-O--XO-XOOO-OXXXOOOX-O--O-O--OXO--OX-OXXOO-XO--X----OXOOOXXO-OXX-OOO-X-OOXX--OX-OOOO---X-XOO-OXXOO-OXX---O-OO--XOXOO--O--OXOX--XOOOX-XXO-OX-X---OOXOXXXOO-OXX-O-XOXOO--XOOOOXX-XOXXO----OXOX-O-O-XXOXXOOOXOO---XX-XXOXXO-XOOOO--XOOX-XXXOO-O--OOO-O---X-O-X--OXXOO-O-OXOXOX--OXO-XOOX--OOXO-O-X-O-OXO-OOO--XOO--OXX-XOOOOXX-OO---XOXO-X-XOXO-XOOO-OXO-OX-XO--OX-O-X-OOOXXX--O-X-O-OXO-OXOO-XO---O-OX--OOXXXO-XXOOOOOX-X--XX-OOOO-XO-XXXOO-OO--XOX--OX-X-OO-OO-X-OO-OX-OXO-OOXXO--OXXO-XXOO---O-OXOOX--X-OXOOX--OOOX---OXOOOX-O---OXO-X-OXOXOX-X-O-O-O-XXXO-X-X-OO-OO-OXOOXO-X-XOOOXOO-X--OOX-X--OX-OO-X--X-O-OOXOX--OXOOXXOOO-X-OOOO--XXXOXXXOO-OOOX---X-O--O-XOO-XOO-X-OXOX--OOOO--XOX-OOOOXXXOX-X---O-OOOOX-X---OOO-O-XOXXX---OOXX-OOXO-O-OOXX-O-OX-X-OXXOX-OOOXXO---OO--OO-O-O-OX-OXX-XOOO-X-XOXOO---OX--OXOOOOXXX-OX-OOOO---XXX-O-X-OX-O--XOOX-OXOXOO-OX-O--XXOOO--XOOXOO-X--X-XO-O-O-XOO-X---O-O-OXOOXXOOXXOOOO--X-XOXXO--OOOO-O-XXOOX---OOX--XOXO-OOOXX-X---OO--OXOX-OX--O-O-OOXX-OXO-OOX-XXOXO-X-OXXXOO--XO-X-OO-OOX-OOX-OXO-O-OXOOOX--X--"
 //這個是一種假設的數據!
 const char schedule_all[]=OX_schedule;
@@ -173,6 +175,9 @@ void *popHeap(Heap *heap)
     }
 }
 
+#define LIMITER 3
+#define REQUEST_HOUR 6
+
 Schedule every_one_ok(Heap *heap)
 {
     Schedule stuff2return;
@@ -181,8 +186,16 @@ Schedule every_one_ok(Heap *heap)
         for(int j = 0 ; j <8 ; j++)
         {
             Node *tmp=heap->Head;
+            stuff2return.D[i].className[j]=anyway;
+#ifdef LIMITER
+            int limiter=0;
+            while(limiter<LIMITER)
+            {
+                limiter++;
+#else
             while(tmp!=NULL)
             {
+#endif // LIMITER
                 if(((MEMBER)(tmp->data))->schedule.D[i].className[j]==no)
                 {
                     stuff2return.D[i].className[j]=no;
@@ -195,9 +208,65 @@ Schedule every_one_ok(Heap *heap)
     return stuff2return;
 }
 
-//TODO
-//2. all men able | all men disable;
-//3. 幹真的要看書 棋盤/遊戲問題
+typedef struct Vec
+{
+    double v[8*5];
+} Vec;
+
+typedef struct kmGroup
+{
+    Vec center;
+    Heap *table;
+} kmGroup;
+
+Vec ToVec(Schedule schedule)
+{
+    Vec vec;
+    int ptr=0;
+    for(int i = 0; i < 8 ; i++)
+    {
+        for(int j = 0; j < 5 ; j++)
+        {
+            vec.v[++ptr]=(schedule.D[j].className[i]==yes)?1.0:(schedule.D[j].className[i]==no)?-1.0:0.0;
+        }
+    }
+    return vec;
+}
+
+double Distance(Vec a,Vec b)
+{
+    double tmp=0.0;
+    for(int i = 0; i < 5*8 ; i++)
+    {
+        tmp+=pow(a.v[i]-b.v[i],2);
+    }
+    return tmp;
+};
+
+#define GROUPNUM 5
+
+int comp(const void *a,const void *b){
+return (*((int*)a))-(*((int*)b));
+}
+
+int *gen_rand(){
+int *tmp=(int*)malloc(sizeof(int)*GROUPNUM);
+srand((unsigned)time());
+int i=0;
+while(i<GROUPNUM){
+int x=rand();
+void *y=bsearch(&x,tmp,i,sizeof(int),&comp);
+if(y==NULL){
+    tmp[++i]=*((int*)y);
+qsort(tmp,i,sizeof(int),&comp);
+}
+}
+return tmp;
+}
+
+kmGroup Initkm(Heap *heap){
+
+}
 
 int main()
 {
