@@ -327,21 +327,12 @@ void OnTag(kmGroup* km,Heap *heap)
     for(int i = 0 ; i < GROUPNUM ; i++)
     {
         ptr=heap->Head;
-        //TODO:REMOVE
-        //printf("\x1b[32;40m[DEBUG@%s(L:%d)]\t{%d}\x1b[0m",__func__,__LINE__,i);
         int j=0;
         while(ptr!=NULL)
         {
             tmp[j].distance[i].d=Distance(km[i].center,ToVec(((MEMBER)(ptr->data))->schedule));
             tmp[j].distance[i].i=i;
-            //TODO:REMOVE
-            //printf("DEBUG [@%s(L:%d)] : d=%lf, i=%d;\n",__func__,__LINE__,tmp[j].distance[i].d,tmp[j].distance[i].i);
-            qsort(tmp[j].distance,i+1,sizeof(MAPdi),&compDi);//qsort(tmp, i, sizeof(int), &comp);
-//TODO:REMOVE
-//            LOOP_NUM(thisisaittvar,5)
-//            {
-//                DEBUGlf(tmp[j].distance[thisisaittvar].d)
-//            }
+            qsort(tmp[j].distance,i+1,sizeof(MAPdi),&compDi);
             ptr=ptr->next;
             j++;
         }
@@ -349,12 +340,7 @@ void OnTag(kmGroup* km,Heap *heap)
     ptr=heap->Head;
     int j=0;
     while(ptr!=NULL)
-    {//TODO:REMOVE
-//        LOOP_NUM(i,5)
-//        {
-//            DEBUGlf(tmp[j].distance[i].d)
-//        }
-        //printf("log:[%d,%lf]",tmp[j].distance[0].i,tmp[j].distance[0].d);
+    {
         addHeap(&(km[tmp[j].distance[0].i].table),ptr->data);
         j++;
         ptr=ptr->next;
