@@ -295,7 +295,7 @@ int *gen_rand(int max_num)
 
 int compDi(const void *a, const void *b)
 {
-    return round(((MAPdi *)a)->d - ((MAPdi *)b)->d);
+    return (int)round(((MAPdi *)a)->d - ((MAPdi *)b)->d);//TODO:https://stackoverflow.com/questions/45404302/rounding-float-to-int
 }
 
 void OnTag(kmGroup* km,Heap *heap)
@@ -314,7 +314,8 @@ void OnTag(kmGroup* km,Heap *heap)
             tmp[j].distance[i].d=Distance(km[i].center,ToVec(((MEMBER)(ptr->data))->schedule));
             tmp[j].distance[i].i=i;
             printf("DEBUG [@%s(L:%d)] : d=%lf, i=%d;\n",__func__,__LINE__,tmp[j].distance[i].d,tmp[j].distance[i].i);
-            qsort(tmp[j].distance,i,sizeof(MAPdi),&compDi);//qsort(tmp, i, sizeof(int), &comp);
+            qsort(tmp[j].distance,i+1,sizeof(MAPdi),&compDi);//qsort(tmp, i, sizeof(int), &comp);
+            LOOP_NUM(thisisaittvar,5){DEBUGlf(tmp[j].distance[thisisaittvar].d)}
             ptr=ptr->next;
             j++;
         }
@@ -327,7 +328,7 @@ void OnTag(kmGroup* km,Heap *heap)
         printf("log:[%d,%lf]",tmp[j].distance[0].i,tmp[j].distance[0].d);
         addHeap(&(km[tmp[j].distance[0].i].table),ptr->data);
         j++;
-        ptr++;
+        ptr=ptr->next;
     }
 }
 
