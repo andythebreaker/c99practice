@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1706509829 source:c:\users\ai\documents\andy\code\c99practice\n0129\firstinstderr\untitled3.c
+	<stdio.h>
+	<stddef.h>
+	<stdlib.h>
+

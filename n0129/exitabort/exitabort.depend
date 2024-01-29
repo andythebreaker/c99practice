@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1706507409 source:c:\users\ai\documents\andy\code\c99practice\n0129\exitabort\untitled1.c
+	<stdbool.h>
+	<stdio.h>
+
