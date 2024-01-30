@@ -8,11 +8,12 @@
 #include <time.h>
 #define OX_schedule "OXXOXXO-OX--O-XOOXXO-X-X-XOO-OXO-OOX-OXOO-OO-XXOO-XXOXOOX-OX-X-XOXXOXOOOX-O--OX-XX--OO-OXXOXOOXO---OOXXXXOO-XXO-OX-O-OXOOOO--OXX-OXXXXO-OX-OOX-OO-X-XXOOX-XO-OXO-OXXOOXX-OXXO-XOO-O-XXOO--OOOXX-OXXO--XO-XXO-O-OOO-OOX-OOOX-XXO-OO-XOXXOXXXO--XXO-O-OXXOXOO---OXXXX-OOOOXO--OXOOXOXX-XX-OO-X-OX-OXXO-XXO-XOO-O-OX-XOXXOO-OOO-XXXOOOX-XXOX-O-OXO--XXOO--OOOXXOXXXOXO---XOXXX--OO-OXX-OX-OO-OX-X-OOOXO-XOXOXOX-OXOXO--XXXOOXOX-XOXOOO---XO--OXXOX-OOXO-OXOOX-OOX-OXXOOXXOOOXXXOO-OOX--O-OXXOX---X-XXOOOXXOXXXOO--X-X-O-O--XXXX-OOOOOOO--XOXX-O-O-XXX-OOOXOOXXX-OOOO-OOO--OXXXO-XX-O-OOXX-XX-OO--OOOXOXO---XXOXX-XOOOXO-XXOX--OOOO-X--XO-XOOOX-O----XOO-XXOO-XOO-XOOXOXO-X--XO--XOX-XXXOOXOX--XOOOOOO-O-XXOO-O-OXO--O---XX--OOXXOXOX-OX-OXOO-OO--XOXXOO-OXOXO-O--O-XOX--O-O-OOX-OX-OO-X--XOOX-OXX--XO-X--OO-XXOO-OO-OO--X-OO-OO--X-OXOX-O-OOX----X-XX-OOO--OX---XOOOO-O--XO--OO-----OXXOX-OOOX--OX-XOOOXXXOOOO---XO-O-OO-X-OXX-OOXOOO---OXOXO-X-OXO-X-OO-X---OXXXOO-OO-OX-O-X-OXXO--XO-OO-OOXO-O-X-X---OOOOOXXXOXXOX-OOO---OX---OX--OO-O-XOXXO--OO---OXOX-OO-O--XOO--XO-XO-XXOOO-XO-XXOOO---X-O-XXOX-O-OO-OXO-OO-XOOX-OO-X-O--O-O-OO-XX-OX-XXX-OO----XOXOOOOOXO--XOXO-OO-OOO-OOXX---XOXXOOOO-XO--X-OX----XOXX-OO-OOOXX-O---O-X--OOOO-OXX-O-XOOX--XOXXO--OOOXXXOO--OOOOX--O-X--OXX--OO-O--XOXOO-O-OOO-XOX-X-O--OXOXOOXXX--OOOO----X-X--XOOX-O--X-XOOOX-OO-OO--O-OXXOXOO-O-X--OX-OXO-XX--OOXOOXX-O-O-XX-O-O-OO-O-O-XOO-OX---O-OXOOX--XXXX-OOO-O--XOO-XOOO--XOXOOOO-XO----OXX-X--OOOXOO-XXOX---O-OO-XOX-O-OOXO-X-O-OO----XOX--O-XXXOOOX-OOO-XOOXO--OX--OXX--OOOX-OXO-OO-O-XXO-O--XO-XOOO-OXXXOOOX-O--O-O--OXO--OX-OXXOO-XO--X----OXOOOXXO-OXX-OOO-X-OOXX--OX-OOOO---X-XOO-OXXOO-OXX---O-OO--XOXOO--O--OXOX--XOOOX-XXO-OX-X---OOXOXXXOO-OXX-O-XOXOO--XOOOOXX-XOXXO----OXOX-O-O-XXOXXOOOXOO---XX-XXOXXO-XOOOO--XOOX-XXXOO-O--OOO-O---X-O-X--OXXOO-O-OXOXOX--OXO-XOOX--OOXO-O-X-O-OXO-OOO--XOO--OXX-XOOOOXX-OO---XOXO-X-XOXO-XOOO-OXO-OX-XO--OX-O-X-OOOXXX--O-X-O-OXO-OXOO-XO---O-OX--OOXXXO-XXOOOOOX-X--XX-OOOO-XO-XXXOO-OO--XOX--OX-X-OO-OO-X-OO-OX-OXO-OOXXO--OXXO-XXOO---O-OXOOX--X-OXOOX--OOOX---OXOOOX-O---OXO-X-OXOXOX-X-O-O-O-XXXO-X-X-OO-OO-OXOOXO-X-XOOOXOO-X--OOX-X--OX-OO-X--X-O-OOXOX--OXOOXXOOO-X-OOOO--XXXOXXXOO-OOOX---X-O--O-XOO-XOO-X-OXOX--OOOO--XOX-OOOOXXXOX-X---O-OOOOX-X---OOO-O-XOXXX---OOXX-OOXO-O-OOXX-O-OX-X-OXXOX-OOOXXO---OO--OO-O-O-OX-OXX-XOOO-X-XOXOO---OX--OXOOOOXXX-OX-OOOO---XXX-O-X-OX-O--XOOX-OXOXOO-OX-O--XXOOO--XOOXOO-X--X-XO-O-O-XOO-X---O-O-OXOOXXOOXXOOOO--X-XOXXO--OOOO-O-XXOOX---OOX--XOXO-OOOXX-X---OO--OXOX-OX--O-O-OOXX-OXO-OOX-XXOXO-X-OXXXOO--XO-X-OO-OOX-OOX-OXO-O-OXOOOX--X--"
 #define DEBUGint(X) fprintf(stderr,"\x1b[31;40m[DEBUG@%s:%d]: %s=%d\x1b[0m\n",__func__,__LINE__,#X,X);
-#define DEBUGlf(X) fprintf(stderr,"\x1b[31;40m[DEBUG@%s:%d]: %s=%lf\x1b[0m\n",__func__,__LINE__,#X,X);
+#define DEBUGlf(X) fprintf(stderr,"\x1b[31;40m[DEBUG@%s:%d]: %s=%3.3lf\x1b[0m\n",__func__,__LINE__,#X,X);
 #define DEBUGs(X) fprintf(stderr,"\x1b[31;40m[DEBUG@%s:%d]: %s=%s\x1b[0m\n",__func__,__LINE__,#X,X);
+#define DEBUGp(X) fprintf(stderr,"\x1b[31;40m[DEBUG@%s:%d]: %s=%p\x1b[0m\n",__func__,__LINE__,#X,X);
 #define LOOP_SIZE(t,ITT,X) for(size_t ITT = 0; ITT < sizeof(X)/sizeof(t);ITT++)
 #define LOOP_NUM(ITT,NUM) for(size_t ITT = 0; ITT < NUM;ITT++)
-#define GROUPNUM 5
+#define GROUPNUM 3
 #define NL printf("\n");
 //這個是一種假設的數據!
 const char schedule_all[]=OX_schedule;
@@ -134,7 +135,7 @@ typedef struct Node
 
 typedef struct LinkedList
 {
-    struct Node *Head,*Tail;
+    struct Node *Head,*Tail,*ptr;
 } LinkedList;
 
 typedef LinkedList Heap;
@@ -182,6 +183,23 @@ void *popHeap(Heap *heap)
     }
 }
 
+void *peekHeap(Heap *heap)
+{
+
+    if(heap->ptr==NULL)
+    {
+        return NULL;
+    }
+    void *tmp=heap->ptr->data;
+    heap->ptr=heap->ptr->next;
+    return tmp;
+}
+
+void resetPtr(Heap *heap)
+{
+    heap->ptr=heap->Head;
+}
+
 #define LIMITER 3
 #define REQUEST_HOUR 6
 
@@ -220,6 +238,7 @@ typedef struct Vec
     double v[8*5];
     MEMBER m;
 } Vec;
+
 typedef struct MAPdi
 {
     int i;
@@ -236,25 +255,6 @@ typedef struct kmGroup
     Heap table;
 } kmGroup;
 
-void updateKM(kmGroup *km)
-{
-    LOOP_NUM(i,GROUPNUM)
-    {
-        Node *ptr = km[i].table.Head;
-        printf("center");
-        LOOP_NUM(itt,(8*5))
-        {
-            printf("%lf,",km[i].center.v[itt]);
-        }
-        NL
-        while(ptr!=NULL)
-        {
-            DEBUGs(((MEMBER)(ptr->data))->name);
-            ptr=ptr->next;
-        }
-    }
-}
-
 Vec ToVec(Schedule schedule)
 {
     Vec vec;
@@ -268,6 +268,47 @@ Vec ToVec(Schedule schedule)
     }
     return vec;
 }
+
+void updateKM(kmGroup *km)
+{
+    LOOP_NUM(i,GROUPNUM)
+    {
+        LOOP_NUM(itt,(8*5))
+        {
+            double sum=0.0;
+            int j = 0;
+            resetPtr(&(km[i].table));
+            MEMBER wtf = (i==(GROUPNUM-1)&&itt==(8*5-1))?(MEMBER)(popHeap(&(km[i].table))):(MEMBER)(peekHeap(&(km[i].table)));//TODO:what?
+            while(wtf!=NULL)
+            {
+                Vec v =ToVec( wtf->schedule );
+                if(itt==(8*5-1))
+                {
+                    DEBUGs(wtf->name)
+                    LOOP_NUM(vidx,(8*5))
+                    {
+                        printf("%2.0lf,",v.v[vidx]);
+                    }
+                    NL
+                }
+                sum+=v.v[itt];
+                j++;
+                wtf = (i==(GROUPNUM-1)&&itt==(8*5-1))?(MEMBER)(popHeap(&(km[i].table))):(MEMBER)(peekHeap(&(km[i].table)));
+            }
+            double nanicora =sum/(j-1.0);
+            km[i].center.v[itt]=nanicora;
+        }
+        NL
+        printf("center(new)");
+        LOOP_NUM(itt,(8*5))
+        {
+            printf("%lf,",km[i].center.v[itt]);
+        }
+        NL
+        initHeap(&(km[i].table));
+    }
+}
+
 
 double Distance(Vec a,Vec b)
 {
@@ -303,13 +344,17 @@ int *gen_rand(int max_num)
     int i = 0;
     while (i < GROUPNUM)
     {
-        int x = rand();
+        int x = rand()% max_num;
         void *y = bsearch(&x, tmp, i, sizeof(int), &comp);
         if (y == NULL)
         {
             tmp[i++] = x % max_num;
             qsort(tmp, i, sizeof(int), &comp);
         }
+    }
+    LOOP_NUM(i,GROUPNUM)
+    {
+        DEBUGint(tmp[i])
     }
     return tmp;
 }
@@ -367,14 +412,11 @@ kmGroup *Initkm(Heap *heap)
         i++;
         ptr=ptr->next;
     }
-    /*for(int i = 0; i < GROUPNUM; i++){
-
-
-    }*/
     OnTag(tmp,heap);
     return tmp;
 }
 
+#define KMLOOP 20
 
 int main()
 {
@@ -433,7 +475,12 @@ int main()
 
     //K----------------------------------------------------------------------------------------------------------
     kmGroup *km=Initkm(&heap);
-    updateKM(km);
+    LOOP_NUM(i,KMLOOP)
+    {
+        DEBUGint(i);
+        updateKM(km);
+        OnTag(km,&heap);
+    }
     //K----------------------------------------------------------------------------------------------------------
 
     while(heap.Tail!=NULL)

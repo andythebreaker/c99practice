@@ -1,0 +1,14 @@
+{"table": [
+    {"x": 2, "y": 1, "n": True, "e": False, "w": False, "s": True, "color": "green"},
+    {"x": 3, "y": 3, "n": True, "e": True, "w": True, "s": True, "color": "green"},
+    {"x": 1, "y": 2, "n": True, "e": False, "w": False, "s": True, "color": "green"},
+    
+    {"x": 1, "y": 1, "n": False, "e": False, "w": False, "s": False, "color": "green"},
+    {"x": 2, "y": 3, "n": True, "e": False, "w": False, "s": True, "color": "blue"},
+    {"x": 3, "y": 2, "n": True, "e": False, "w": False, "s": True, "color": "green"},
+    
+    {"x": 3, "y": 1, "n": True, "e": False, "w": False, "s": True, "color": "green"},
+    {"x": 1, "y": 3, "n": True, "e": False, "w": False, "s": True, "color": "green"},
+    {"x": 2, "y": 2, "n": True, "e": False, "w": False, "s": True, "color": "red"}
+  ]
+}
