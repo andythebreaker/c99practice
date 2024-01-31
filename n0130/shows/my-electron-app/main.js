@@ -71,7 +71,7 @@ function createWindow() {
     mainWindow.loadURL(`data:text/html;charset=utf-8,${encodeURIComponent(htmlString)}`);
   } else {
     // If no base64 string is provided, load a default HTML file or do nothing
-    mainWindow.loadFile('index.html');
+    mainWindow.loadFile('tmp.html');
   }
 
   // Open the DevTools.

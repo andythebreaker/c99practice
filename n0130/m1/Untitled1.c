@@ -2,8 +2,9 @@
 #include <stdbool.h>
 #include <stdlib.h> // for rand()
 #include <time.h>
-#define WIDTH 5
-#define HEIGHT 5
+#include <math.h>
+#define WIDTH 48
+#define HEIGHT 48
 #define SVG_IDX_MARGEN 0
 typedef struct
 {
@@ -14,6 +15,7 @@ typedef struct
     bool w;
     bool s;
     bool visited; // Added for tracking visited cells
+    int step;
     const char* color;
 } Cell;
 
@@ -123,6 +125,7 @@ void dfs(Cell* cell, Maze* maze)
         }
         removeWalls(cell, n);
         dfs(n, maze);
+        dfs(cell, maze);
     }
 }
 
@@ -172,13 +175,197 @@ Maze initMaze()
     return maze;
 }
 
+typedef struct Node
+{
+    void *data;
+    struct Node *next,*prev;
+} Node;
+
+typedef struct LinkedList
+{
+    Node *Head,*Tail,*Current;
+} LinkedList;
+
+void addHead(LinkedList *linkedlist, void *data)
+{
+    Node *node = (Node*)malloc(sizeof(Node));
+    node->data=data;
+    node->next=linkedlist->Head;
+    if(linkedlist->Tail==NULL)
+    {
+        linkedlist->Tail=node;
+    }
+    linkedlist->Head=node;
+}
+
+void addTail(LinkedList *linkedlist, void *data)
+{
+    Node *node = (Node*)malloc(sizeof(Node));
+    node->data=data;
+    node->next=NULL;
+    if(linkedlist->Head==NULL)
+    {
+        linkedlist->Head=node;
+    }
+    else
+    {
+        linkedlist->Tail->next=node;
+    }
+    linkedlist->Tail=node;
+}
+
+void initLinkedList(LinkedList *linkedlist)
+{
+    linkedlist->Head=NULL;
+    linkedlist->Tail=NULL;
+}
+
+typedef LinkedList Queue;
+
+void initQueue(Queue *queue)
+{
+    initLinkedList((LinkedList*)queue);
+}
+
+void enQueue(Queue *queue,void *data)
+{
+    addTail(queue,data);
+}
+
+void *deQueue(Queue *queue)
+{
+    void *tmp=NULL;
+    if(queue->Tail==NULL)
+    {
+        tmp = NULL;
+    }
+    else if(queue->Head==queue->Tail)
+    {
+        tmp=queue->Head->data;
+        free(queue->Head);
+        queue->Head=NULL;
+        queue->Tail=NULL;
+    }
+    else
+    {
+        tmp=queue->Head->data;
+        Node *f2 = queue->Head;
+        queue->Head=queue->Head->next;
+        free(f2);
+    }
+    return tmp;
+}
+
+Cell **Neighbors(Maze *maze,Cell *cell)
+{
+    int x=0;
+    Cell **tmp=(Cell**)malloc(sizeof(Cell*));
+    tmp[0]=NULL;
+    if(cell->y>0&&(!cell->n)&&(!maze->table[cell->y*WIDTH+cell->x-WIDTH].visited))
+    {
+        x++;
+        void *y=(Cell**)realloc(tmp,sizeof(Cell*)*(x+1));
+        tmp=y;
+        tmp[x-1]=&(maze->table[cell->y*WIDTH+cell->x-WIDTH]);
+        tmp[x]=NULL;
+    }
+    if(cell->y<HEIGHT-1&&(!cell->s)&&(!maze->table[cell->y*WIDTH+cell->x+WIDTH].visited))
+    {
+        x++;
+        void *y=(Cell**)realloc(tmp,sizeof(Cell*)*(x+1));
+        tmp=y;
+        tmp[x-1]=&(maze->table[cell->y*WIDTH+cell->x+WIDTH]);
+        tmp[x]=NULL;
+    }
+    if(cell->x>0&&(!cell->w)&&(!maze->table[cell->y*WIDTH+cell->x-1].visited))
+    {
+        x++;
+        void *y=(Cell**)realloc(tmp,sizeof(Cell*)*(x+1));
+        tmp=y;
+        tmp[x-1]=&(maze->table[cell->y*WIDTH+cell->x-1]);
+        tmp[x]=NULL;
+    }
+    if(cell->x<WIDTH-1&&(!cell->e)&&(!maze->table[cell->y*WIDTH+cell->x+1].visited))
+    {
+        x++;
+        void *y=(Cell**)realloc(tmp,sizeof(Cell*)*(x+1));
+        tmp=y;
+        tmp[x-1]=&(maze->table[cell->y*WIDTH+cell->x+1]);
+        tmp[x]=NULL;
+    }
+    return tmp;
+}
+
+void clearVisited(Maze *maze)
+{
+    for(int i = 0 ; i < WIDTH*HEIGHT; i++)
+    {
+        maze->table[i].visited=false;
+    }
+}
+
+void bfs(Maze *maze,Cell *start,Cell *stop)
+{
+    Queue queue;
+    initQueue(&queue);
+    enQueue(&queue,start);
+    start->visited=true;
+    start->step=0;
+    while(queue.Tail!=NULL)
+    {
+        void *tmp=deQueue(&queue);
+        int Step=((Cell*)tmp)->step+1;
+        if(tmp==stop)
+        {
+            printf("\t\tstep:%d",((Cell*)tmp)->step);
+            printf("finish");
+            break;
+        }
+        Cell **n=Neighbors(maze,(Cell*)tmp);
+        Cell **nPTR=n;
+        while(*nPTR!=NULL)
+        {
+            (*nPTR)->visited=true;
+            (*nPTR)->color="yellow";
+            (*nPTR)->step=Step;
+            printf("(%d,%d)\n",(*nPTR)->x,(*nPTR)->y);
+            enQueue(&queue,*nPTR);
+            nPTR++;
+        }
+    }
+    Cell *tmp=stop;
+    tmp->color="Coral";
+    clearVisited(maze);
+    while(tmp!=start)
+    {
+        //printf("\t\tstep:%d",tmp->step);
+        Cell **n=Neighbors(maze,tmp);
+        Cell **nPTR=n;
+        while(*nPTR!=NULL)
+        {
+            int stepThis=tmp->step;
+            Cell *wtf=*nPTR;
+            int wtf_x=wtf->x;
+            int stepThat=wtf->step;
+            if(stepThat==stepThis-1)
+            {
+                tmp=(*nPTR);
+                (*nPTR)->color="Coral";
+                break;
+            }
+            nPTR++;
+        }
+    }
+}
+
 int main()
 {
     srand(time(NULL));
     Maze maze = initMaze();
     generateMaze(&maze);
+    clearVisited(&maze);
+    bfs(&maze,&(maze.table[0]),&(maze.table[WIDTH*HEIGHT-1]));
     printMaze(&maze);
-
     return 0;
 }
 

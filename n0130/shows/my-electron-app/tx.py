@@ -4,7 +4,16 @@ import tkinter as tk
 import os
 
 def generate_svg(table):
-    svg_code = f'<svg width="{5*50}" height="{5*50}" xmlns="http://www.w3.org/2000/svg">\n'
+    #for cell in table: find max x and y
+    max_x = 0
+    max_y = 0
+    for cell in table:
+        if cell["x"] > max_x:
+            max_x = cell["x"]
+        if cell["y"] > max_y:
+            max_y = cell["y"]
+
+    svg_code = f'<svg width="{(max_x+1)*50}" height="{(max_y+1)*50}" xmlns="http://www.w3.org/2000/svg">\n'
     
     # Define cell size and padding
     svg_code += '    <defs>\n      <style>\n        .cell { width: 50px; height: 50px; }\n'
@@ -42,9 +51,13 @@ def on_generate_svg():
         svg_output = generate_svg(input_data["table"])
         output_textbox.delete("1.0", "end")
         output_textbox.insert("1.0", svg_output)
+        #save svgoutput to tmp.html
+        f = open("tmp.html", "w")
+        f.write(svg_output)
+        f.close()
         # svg_output -> base64
-        encoded_bytes = base64.b64encode(svg_output.encode('utf-8'))
-        print(str(encoded_bytes)[2:-1])
+        #encoded_bytes = base64.b64encode(svg_output.encode('utf-8'))
+        #print(str(encoded_bytes)[2:-1])
         # cmd npm start encoded_bytes
         
         # Get the current working directory
@@ -54,7 +67,8 @@ def on_generate_svg():
         subprocess.run(['cd', current_dir], shell=True, check=True)
 
         # Run npm start using subprocess
-        subprocess.run(['npm', 'start',str(encoded_bytes)[2:-1]], shell=True, check=True)
+        #subprocess.run(['npm', 'start',str(encoded_bytes)[2:-1]], shell=True, check=True)
+        subprocess.run(['npm', 'start'], shell=True, check=True)
 
     except Exception as e:
         output_textbox.delete("1.0", "end")

@@ -1,7 +1,8 @@
 # depslib dependency file v1.0
-1706597932 source:c:\users\ai\documents\andy\code\c99practice\n0130\m1\untitled1.c
+1706698315 source:c:\users\ai\documents\andy\code\c99practice\n0130\m1\untitled1.c
 	<stdio.h>
 	<stdbool.h>
 	<stdlib.h>
 	<time.h>
+	<math.h>
 
